@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
@@ -9,6 +9,10 @@ const password = ref('')
 const date = ref(new Date().toLocaleString())
 
 let timer
+
+const updateDate = () => {
+  date.value = new Date().toLocaleString(locale.value === 'zh_tw' ? 'zh-tw' : locale.value)
+}
 
 const handleSubmit = () => {
   if (email.value === 'abc123' && password.value === 'abc123') {
@@ -25,8 +29,11 @@ const changeLanguage = (lang) => {
 }
 
 onMounted(() => {
-  timer = () => (date.value = new Date().toLocaleString())
-  setInterval(timer, 1000)
+  timer = setInterval(updateDate, 1000)
+})
+
+watch(locale, () => {
+  updateDate()
 })
 
 onUnmounted(() => {
@@ -78,7 +85,9 @@ onUnmounted(() => {
           >
             {{ t('login.button') }}
           </button>
-          <h4 class="w-full mt-8 text-base text-gray-500 dark:text-gray-300">Time : {{ date }}</h4>
+          <h4 class="w-full mt-8 text-base text-gray-500 dark:text-gray-300">
+            {{ t('login.time.title') }} : {{ date }}
+          </h4>
         </form>
         <div class="flex justify-between mt-8">
           <button

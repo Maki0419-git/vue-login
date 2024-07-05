@@ -15,6 +15,9 @@ const messages = {
         error: {
           message: 'Wrong Email or Password!'
         }
+      },
+      time: {
+        title: 'Time'
       }
     }
   },
@@ -32,6 +35,9 @@ const messages = {
         error: {
           message: '錯誤的電子郵件或密碼!'
         }
+      },
+      time: {
+        title: '時間'
       }
     }
   },
@@ -49,6 +55,9 @@ const messages = {
         error: {
           message: '間違ったメールアドレスまたはパスワード!'
         }
+      },
+      time: {
+        title: '時間'
       }
     }
   }
